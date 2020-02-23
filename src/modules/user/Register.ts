@@ -1,10 +1,10 @@
 import { Resolver, Query, Mutation, Arg, UseMiddleware } from 'type-graphql'
 import * as bcrypt from 'bcryptjs'
 import { User } from '../../models/User'
-import { RegisterInput } from './RegiterInput'
+import { RegisterInput } from './Register/RegiterInput'
 import { isAuth } from '../../middleware/isAuth'
-import { createConfirmationUrl } from '../../utils/createConfirmation'
-import { sendEmail } from '../../utils/sendEmail'
+import { createConfirmationUrl } from '../utils/createConfirmation'
+import { sendEmail } from '../utils/sendEmail'
 
 @Resolver()
 export class RegisterResolver {
@@ -25,7 +25,9 @@ export class RegisterResolver {
             email,
             password: hashedPassword,
         }).save()
+
         await sendEmail(email, await createConfirmationUrl(user.id))
+
         return user
     }
 }
