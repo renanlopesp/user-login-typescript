@@ -9,11 +9,10 @@ import { User } from '../../models/User'
 @ValidatorConstraint({ async: true })
 export class isEmailAlreadyExistConstraint
     implements ValidatorConstraintInterface {
-    validate(email: string) {
-        return User.findOne({ where: { email } }).then(user => {
-            if (user) return false
-            return true
-        })
+    async validate(email: string) {
+        const user = await User.findOne({ where: { email } })
+        if (user) return false
+        return true
     }
 }
 
