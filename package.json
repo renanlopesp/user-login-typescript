@@ -1,0 +1,26 @@
+{
+    "name": "user-login-typescript",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/renanlopesp/user-login-typescript.git",
+    "author": "Renan Lopes <renanlopesp@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "apollo-server-express": "^2.10.1",
+        "express": "^4.17.1",
+        "graphql": "^14.6.0",
+        "reflect-metadata": "^0.1.13",
+        "type-graphql": "^0.17.6"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.2",
+        "@types/graphql": "^14.5.0",
+        "@types/node": "^13.7.4",
+        "nodemon": "^2.0.2",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.8.2"
+    },
+    "scripts": {
+        "start": "nodemon --exec ts-node src/index.ts"
+    }
+}
