@@ -7,22 +7,13 @@ import * as cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
 import { createConnection } from 'typeorm'
-import { RegisterResolver } from './controllers/user/Register'
 import { redis } from './redis'
-import { LoginResolver } from './controllers/user/Login'
-import { MeResolver } from './controllers/user/Me'
-import { ConfirmUserResolver } from './controllers/user/ConfirmUser'
 
 const main = async () => {
     await createConnection()
 
     const schema = await buildSchema({
-        resolvers: [
-            MeResolver,
-            RegisterResolver,
-            LoginResolver,
-            ConfirmUserResolver,
-        ],
+        resolvers: [__dirname + '/modules/**/*.ts'],
     })
 
     const apolloServer = new ApolloServer({
