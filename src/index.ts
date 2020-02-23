@@ -11,12 +11,18 @@ import { RegisterResolver } from './controllers/user/Register'
 import { redis } from './redis'
 import { LoginResolver } from './controllers/user/Login'
 import { MeResolver } from './controllers/user/Me'
+import { ConfirmUserResolver } from './controllers/user/ConfirmUser'
 
 const main = async () => {
     await createConnection()
 
     const schema = await buildSchema({
-        resolvers: [MeResolver, RegisterResolver, LoginResolver],
+        resolvers: [
+            MeResolver,
+            RegisterResolver,
+            LoginResolver,
+            ConfirmUserResolver,
+        ],
     })
 
     const apolloServer = new ApolloServer({
