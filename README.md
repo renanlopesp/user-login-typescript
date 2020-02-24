@@ -1,4 +1,4 @@
-# TypeGraphQL
+# TypeGraphQL [User Login]
 
 ```shell
 $ sudo apt install redis-server
