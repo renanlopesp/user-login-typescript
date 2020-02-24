@@ -8,6 +8,12 @@ import { ApolloServer } from 'apollo-server-express'
 import { createConnection } from 'typeorm'
 import { redis } from './redis'
 import { createSchema } from './createSchema'
+import {
+    getComplexity,
+    fieldExtensionsEstimator,
+    simpleEstimator,
+} from 'graphql-query-complexity'
+import { separateOperations } from 'graphql'
 
 dotenv.config()
 
@@ -19,6 +25,33 @@ const main = async () => {
     const apolloServer = new ApolloServer({
         schema,
         context: ({ req, res }: any) => ({ req, res }),
+        plugins: [
+            {
+                requestDidStart: () => ({
+                    didResolveOperation({ request, document }) {
+                        const complexity = getComplexity({
+                            schema,
+                            query: request.operationName
+                                ? separateOperations(document)[
+                                      request.operationName
+                                  ]
+                                : document,
+                            variables: request.variables,
+                            estimators: [
+                                fieldExtensionsEstimator(),
+                                simpleEstimator({ defaultComplexity: 1 }),
+                            ],
+                        })
+                        if (complexity >= 20) {
+                            throw new Error(
+                                `Sorry, too complicated query! ${complexity} is over 20 that is the max allowed complexity.`
+                            )
+                        }
+                        console.log('Used query complexity points:', complexity)
+                    },
+                }),
+            },
+        ],
     })
     const app = Express()
 

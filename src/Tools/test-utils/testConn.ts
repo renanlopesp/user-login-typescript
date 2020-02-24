@@ -14,6 +14,6 @@ export const testConn = (drop: boolean = false) => {
         database: process.env.TYPEORM_DATABASE_TEST,
         synchronize: drop,
         dropSchema: drop,
-        entities: [__dirname + '/../entities/*.*'],
+        entities: [__dirname + '/../../entities/*.*'],
     })
 }
