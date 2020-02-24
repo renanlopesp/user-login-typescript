@@ -1,5 +1,5 @@
 import { Resolver, Query, Ctx } from 'type-graphql'
-import { User } from '../../models/User'
+import { User } from '../../entities/User'
 import { MyContext } from '../../types/MyContex'
 
 @Resolver()
