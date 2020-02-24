@@ -15,6 +15,7 @@
         "express": "^4.17.1",
         "express-session": "^1.17.0",
         "graphql": "^14.6.0",
+        "graphql-query-complexity": "^0.4.1",
         "ioredis": "^4.16.0",
         "mysql": "^2.18.1",
         "nodemailer": "^6.4.3",
@@ -47,7 +48,7 @@
     },
     "scripts": {
         "start": "ts-node-dev --respawn src/index.ts",
-        "db:setup": "ts-node ./src/Tools/setup.ts",
+        "db:setup": "ts-node ./src/Tools/test-utils/setup.ts",
         "test": "yarn db:setup && jest"
     }
 }

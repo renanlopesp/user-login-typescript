@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm'
-import { testConn } from '../../../Tools/testConn'
-import { gCall } from '../../../Tools/graphqlCall'
+import { testConn } from '../../../Tools/test-utils/testConn'
+import { gCall } from '../../../Tools/test-utils/graphqlCall'
 import * as faker from 'faker'
 import { User } from '../../../entities/User'
 
